@@ -15,8 +15,7 @@ jobs:
 
       - name: Criar arquivo Service Account
         run: |
-          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > serviceAccount.json
-          # Garante que as aspas e quebras de linha sejam preservadas
+          echo "${{ secrets.FIREBASE_CREDENTIALS }}" | base64 --decode > serviceAccount.json
 
       - name: Configurar Python
         uses: actions/setup-python@v4
