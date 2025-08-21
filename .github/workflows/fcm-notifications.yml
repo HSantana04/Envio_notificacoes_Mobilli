@@ -2,7 +2,7 @@ name: Envio de Notificações FCM
 
 on:
   schedule:
-    - cron: '46 17 * * *'  # 14:46 BRT
+    - cron: '53 17 * * *'  # 14:46 BRT
   workflow_dispatch:
 
 jobs:
@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Criar arquivo Service Account
-        run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > serviceAccount.json
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > serviceAccount.json
+          # Garante que as aspas e quebras de linha sejam preservadas
 
       - name: Configurar Python
         uses: actions/setup-python@v4
