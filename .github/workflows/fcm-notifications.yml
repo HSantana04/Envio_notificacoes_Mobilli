@@ -1,25 +1,21 @@
 name: Envio de Notificações FCM
 
-# Define quando o workflow será executado
 on:
   schedule:
-    - cron: '0 12 * * *' # Todo dia às 12h (UTC)
-  workflow_dispatch: # Permite rodar manualmente também
+    - cron: '46 17 * * *'  # 14:46 BRT
+  workflow_dispatch:
 
 jobs:
   send_fcm:
     runs-on: ubuntu-latest
 
     steps:
-      # Puxa o código do repositório
       - name: Checkout
         uses: actions/checkout@v3
 
-      # Cria o arquivo serviceAccount.json a partir do secret
       - name: Criar arquivo Service Account
         run: echo "${{ secrets.GOOGLE_SERVICE_ACCOUNT }}" > serviceAccount.json
 
-      # Instala o Python e dependências
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
@@ -30,6 +26,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # Roda seu script principal que envia notificações
       - name: Rodar script FCM
         run: python main.py
